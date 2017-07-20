@@ -1,0 +1,12 @@
+# depslib dependency file v1.0
+1469338949 source:d:\qrcode\qrencoder3\main.c
+	<stdio.h>
+	<stdlib.h>
+	"definition.h"
+	<allegro5/allegro.h>
+	<allegro5/allegro_primitives.h>
+	<math.h>
+	<string.h>
+
+1469282523 d:\qrcode\qrencoder3\definition.h
+
