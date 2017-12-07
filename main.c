@@ -6,7 +6,7 @@
 #include <math.h>
 #include <string.h>
 
-unsigned int calalign_n(int ver) //¼ÆËãĞ£ÕıÍ¼ĞÎÊı£¬Í¬Ê±ÎªĞ£ÕıÍ¼ĞÎ×ø±ê¸³Öµ
+unsigned int calalign_n(int ver) //è®¡ç®—æ ¡æ­£å›¾å½¢æ•°ï¼ŒåŒæ—¶ä¸ºæ ¡æ­£å›¾å½¢åæ ‡èµ‹å€¼
 {
     if(ver==1) return 0;
     if(ver>1&&ver<=6) return 1;
@@ -193,13 +193,13 @@ void getalign_coord(Qrcodeinfo* qrcode,int ver)
 
 
     if(ver>MAXVERSION)
-    {printf("³¬³ö°æ±¾ÏŞÖÆ£¡Ä¿Ç°½öÖ§³ÖÇ°14¸ö°æ±¾\n");return;}
+    {printf("è¶…å‡ºç‰ˆæœ¬é™åˆ¶ï¼ç›®å‰ä»…æ”¯æŒå‰14ä¸ªç‰ˆæœ¬\n");return;}
 }
-void QRinit(Qrcodeinfo* qrcode,int ver) //ÓÉÖ¸¶¨°æ±¾ºÅÉú³É¸Ã¶şÎ¬ÂëµÄÆäËûĞÅÏ¢
+void QRinit(Qrcodeinfo* qrcode,int ver) //ç”±æŒ‡å®šç‰ˆæœ¬å·ç”Ÿæˆè¯¥äºŒç»´ç çš„å…¶ä»–ä¿¡æ¯
 {
     qrcode->ver=ver;
     if(ver>MAXVERSION)
-        {printf("°æ±¾³¬³öÏŞÖÆ£¡Ä¿Ç°½öÖ§³ÖÇ°14¸ö°æ±¾\n");return;}
+        {printf("ç‰ˆæœ¬è¶…å‡ºé™åˆ¶ï¼ç›®å‰ä»…æ”¯æŒå‰14ä¸ªç‰ˆæœ¬\n");return;}
     qrcode->length=17+4*ver;
     qrcode->align_n=calalign_n(ver);
     getalign_coord(qrcode,ver);
@@ -209,7 +209,7 @@ void QRinit(Qrcodeinfo* qrcode,int ver) //ÓÉÖ¸¶¨°æ±¾ºÅÉú³É¸Ã¶şÎ¬ÂëµÄÆäËûĞÅÏ¢
     qrcode->datan=qrcode->length*qrcode->length-qrcode->funcn-qrcode->formatn;
     qrcode->coden=qrcode->datan/8;
     qrcode->ecodata=econfig[ver-1];
-    qrcode->msgn=(qrcode->datan-qrcode->ecodata.ecoden*8)/8*8; //°´ÕÕ±ê×¼£¬ĞÅÏ¢Î»Êı£¨²»º¬¾À´í£©Ó¦Îª8µÄ±¶Êı
+    qrcode->msgn=(qrcode->datan-qrcode->ecodata.ecoden*8)/8*8; //æŒ‰ç…§æ ‡å‡†ï¼Œä¿¡æ¯ä½æ•°ï¼ˆä¸å«çº é”™ï¼‰åº”ä¸º8çš„å€æ•°
     qrcode->msgcode=qrcode->msgn/8;
     qrcode->remainbit=qrcode->datan%8;
 }
@@ -220,7 +220,7 @@ unsigned int getmsgn(unsigned int ver)
     if(ver==1) funcn=202;
     else funcn=180+25*calalign_n(ver)+2*(17+4*ver)-10*sqrt(3+calalign_n(ver));
     datan=(17+4*ver)*(17+4*ver)-funcn-formatn;
-    msgn=(datan-econfig[ver-1].ecoden*8)/8*8; //°´ÕÕ±ê×¼£¬ĞÅÏ¢Î»Êı£¨²»º¬¾À´í£©Ó¦Îª8µÄ±¶Êı
+    msgn=(datan-econfig[ver-1].ecoden*8)/8*8; //æŒ‰ç…§æ ‡å‡†ï¼Œä¿¡æ¯ä½æ•°ï¼ˆä¸å«çº é”™ï¼‰åº”ä¸º8çš„å€æ•°
     return msgn;
 }
 unsigned int getdatan(unsigned int ver)
@@ -232,7 +232,7 @@ unsigned int getdatan(unsigned int ver)
     datan=(17+4*ver)*(17+4*ver)-funcn-formatn;
     return datan;
 }
-//·ÖÎöÊı¾İÀàĞÍ£¬·µ»ØÖµËµÃ÷£º0±íÊı×Ö£»1±í8Î»×Ö½Ú£»-1±íÔİ²»Ö§³Ö
+//åˆ†ææ•°æ®ç±»å‹ï¼Œè¿”å›å€¼è¯´æ˜ï¼š0è¡¨æ•°å­—ï¼›1è¡¨8ä½å­—èŠ‚ï¼›-1è¡¨æš‚ä¸æ”¯æŒ
 int str_analysis(char* text)
 {
     int num=1;
@@ -240,7 +240,7 @@ int str_analysis(char* text)
     if(num==1) return 0;
     else return 1;
 }
-int numcal(int n) //Êı×ÖÄ£Ê½£ºÓÉÊı×Ö¸öÊı¼ÆËãËùĞèµÄ¶ş½øÖÆÊı¾İÎ»Êı
+int numcal(int n) //æ•°å­—æ¨¡å¼ï¼šç”±æ•°å­—ä¸ªæ•°è®¡ç®—æ‰€éœ€çš„äºŒè¿›åˆ¶æ•°æ®ä½æ•°
 {
     int coden,leftn,finn;
     coden=n/3;
@@ -249,24 +249,24 @@ int numcal(int n) //Êı×ÖÄ£Ê½£ºÓÉÊı×Ö¸öÊı¼ÆËãËùĞèµÄ¶ş½øÖÆÊı¾İÎ»Êı
     if(leftn==1) finn=coden*10+4;
     if(leftn==2) finn=coden*10+7;
     if(n<=235) finn+=4+10; //<288
-    else if(n<=1425) finn+=4+12;         //´Ó°æ±¾10¿ªÊ¼£¬×Ö·û¼ÆÊıÖ¸Ê¾·ûµÄÎ»ÊıÊÇ12¶ø²»ÊÇ10
+    else if(n<=1425) finn+=4+12;         //ä»ç‰ˆæœ¬10å¼€å§‹ï¼Œå­—ç¬¦è®¡æ•°æŒ‡ç¤ºç¬¦çš„ä½æ•°æ˜¯12è€Œä¸æ˜¯10
     else finn+=4+14;
     return finn;
 }
-int asciical(int n)//°ËÎ»×Ö½ÚÄ£Ê½£ºÓÉasciiÂë¸öÊı¼ÆËãËùĞèµÄ¶ş½øÖÆÊı¾İÎ»Êı
+int asciical(int n)//å…«ä½å­—èŠ‚æ¨¡å¼ï¼šç”±asciiç ä¸ªæ•°è®¡ç®—æ‰€éœ€çš„äºŒè¿›åˆ¶æ•°æ®ä½æ•°
 {
     int finn=8*n;
     if(n<=98) finn+=4+8;
     else finn+=4+16;
     return finn;
 }
-int ver_determine(char* text,int mode) //È·¶¨°æ±¾
+int ver_determine(char* text,int mode) //ç¡®å®šç‰ˆæœ¬
 {
     unsigned int ver,len=strlen(text);
     unsigned int num,msgn;
     if(mode==NUMBERMODE) num=numcal(len);
     else if(mode==ASCIIMODE) num=asciical(len);
-    else {printf("²»ÄÜÊ¶±ğµÄ´íÎó\n");num=0;return -1;}
+    else {printf("ä¸èƒ½è¯†åˆ«çš„é”™è¯¯\n");num=0;return -1;}
         for(ver=1;ver<=MAXVERSION;ver++)
             {
                 msgn=getmsgn(ver);
@@ -282,23 +282,23 @@ int ver_determine(char* text,int mode) //È·¶¨°æ±¾
     return -2;
 }
 char* itoa(int,char*,int);
-void bin_init(int ver,int mode,char* bin,int n) //ÔÚ¶ş½øÖÆÎ»Á÷ÖĞÌí¼ÓÄ£Ê½Ö¸Ê¾·ûºÍ¼ÆÊıÖ¸Ê¾·û
+void bin_init(int ver,int mode,char* bin,int n) //åœ¨äºŒè¿›åˆ¶ä½æµä¸­æ·»åŠ æ¨¡å¼æŒ‡ç¤ºç¬¦å’Œè®¡æ•°æŒ‡ç¤ºç¬¦
 {
     char *data,temp[16],*p;int len,reallen;//data:
     strcat(bin,modeindic[mode]);
 
-    itoa(n,temp,2); //½«×Ö·ûÊı×ª»»Îª¶ş½øÖÆ
+    itoa(n,temp,2); //å°†å­—ç¬¦æ•°è½¬æ¢ä¸ºäºŒè¿›åˆ¶
     reallen=strlen(temp);
-    if(ver>=1&&ver<=9) {len=11;if(mode==ASCIIMODE) len=9;}//Ôö²¹µã
+    if(ver>=1&&ver<=9) {len=11;if(mode==ASCIIMODE) len=9;}//å¢è¡¥ç‚¹
     if(ver>=10&&ver<=26) {len=13;if(mode==ASCIIMODE) len=17;}
     if(ver>=27&&ver<=40) {len=15;if(mode==ASCIIMODE) len=17;}
     data=(char*)malloc(len);
     for(p=data;p<data+len-reallen-1;p++) *p='0';
-    strcpy(p,temp);//p´ËÊ±Ö¸ÏòdataÖĞ×îºóÒ»Î»Áãºó
+    strcpy(p,temp);//pæ­¤æ—¶æŒ‡å‘dataä¸­æœ€åä¸€ä½é›¶å
     strcat(bin,data);
     free(data);
 }
-char (*num_strdivide(char* text))[4] //½«Ô­ÎÄ±¾·Ö×é£¬·µ»ØÒ»¸öĞĞÖ¸Õë
+char (*num_strdivide(char* text))[4] //å°†åŸæ–‡æœ¬åˆ†ç»„ï¼Œè¿”å›ä¸€ä¸ªè¡ŒæŒ‡é’ˆ
 {
     static char part[200][4];
     char (*p)[4]=part,*q=text;
@@ -306,8 +306,8 @@ char (*num_strdivide(char* text))[4] //½«Ô­ÎÄ±¾·Ö×é£¬·µ»ØÒ»¸öĞĞÖ¸Õë
     for(;*q;j++) {if(j!=0&&j%3==0) p++; (*p)[j%3]=*q++;}
     return part;
 }
-//Ôö²¹µã2
-void numtobin(char (*part)[4],char* bin) //¸ø¶ş½øÖÆÊı×é¼ÓÉÏÊı¾İ
+//å¢è¡¥ç‚¹2
+void numtobin(char (*part)[4],char* bin) //ç»™äºŒè¿›åˆ¶æ•°ç»„åŠ ä¸Šæ•°æ®
 {
     int dint;
     unsigned int l,len;
@@ -321,7 +321,7 @@ void numtobin(char (*part)[4],char* bin) //¸ø¶ş½øÖÆÊı×é¼ÓÉÏÊı¾İ
         else if(strlen(*part)==1) len=5;
         else len=11;
         data=(char*)malloc(len);
-        for(p=data;p<data+len-l-1;p++) *p='0';  //data£ºÇ°ÓĞlen-l-1¸ö0
+        for(p=data;p<data+len-l-1;p++) *p='0';  //dataï¼šå‰æœ‰len-l-1ä¸ª0
         strcpy(p,temp);
         strcat(bin,data);
         free(data);
@@ -336,7 +336,7 @@ void asciitobin(char* text,char* bin)
         itoa(*text,temp,2);
         reallen=strlen(temp);
         data=(char*)malloc(len);
-        for(p=data;p<data+len-reallen-1;p++) *p='0';  //data£ºÇ°ÓĞlen-l-1¸ö0
+        for(p=data;p<data+len-reallen-1;p++) *p='0';  //dataï¼šå‰æœ‰len-l-1ä¸ª0
         strcpy(p,temp);
         strcat(bin,data);
         free(data);
@@ -365,7 +365,7 @@ int codetonum(char* str)
     int sum=0;int i;
     for(i=0;i<=7;i++)
         sum+=(str[i]-48)*pow(2,7-i);
-    return sum; //sumµÄÈ¡ÖµÎª0,1,...,255.³ıÁË0£¬¾ù¿ÉÒÔÓÉaµÄÃİ±íÊ¾
+    return sum; //sumçš„å–å€¼ä¸º0,1,...,255.é™¤äº†0ï¼Œå‡å¯ä»¥ç”±açš„å¹‚è¡¨ç¤º
 }
 int GFadd(int a,int b)
 {
@@ -406,7 +406,7 @@ void PolyMultiply(int N,int* Const,int (*Ecoe)[N],int i,int delta)
         else Ecoe[i][n]=0;
     }
 }
-void PolyAdd(int N,int* Const,int (*Ecoe)[N],int i,int j) //½«µÚi+1¸öÊ½×ÓÒì»òµÚj+1¸öÊ½×Ó£¬²¢±£´æµ½µÚi+1¸öÊ½×ÓÖĞ
+void PolyAdd(int N,int* Const,int (*Ecoe)[N],int i,int j) //å°†ç¬¬i+1ä¸ªå¼å­å¼‚æˆ–ç¬¬j+1ä¸ªå¼å­ï¼Œå¹¶ä¿å­˜åˆ°ç¬¬i+1ä¸ªå¼å­ä¸­
 {
     int n;
     Const[i]=Const[i]^Const[j];
@@ -420,7 +420,7 @@ void RowExchange(int N,int* Const,int (*Ecoe)[N],int i,int j)
         {temp=Ecoe[i][n];Ecoe[i][n]=Ecoe[j][n];Ecoe[j][n]=temp;}
     temp=Const[i];Const[i]=Const[j];Const[j]=temp;
 }
-void RootSubstract(int N,int* Const,int (*Ecoe)[N],int root,int n)//n£ºµÚn¸ö¸ù
+void RootSubstract(int N,int* Const,int (*Ecoe)[N],int root,int n)//nï¼šç¬¬nä¸ªæ ¹
 {
     int *delta=(int*)malloc(N*sizeof(int)),i;
     for(i=0;i<=N-1;i++)
@@ -429,9 +429,9 @@ void RootSubstract(int N,int* Const,int (*Ecoe)[N],int root,int n)//n£ºµÚn¸ö¸ù
         Const[i]=GFadd(delta[i],Const[i]);
     }
 }
-void PrintEQA(int N, int* Const,int (*Ecoe)[N],int n)//nÎªµ±Ç°ÁĞÊı
+void PrintEQA(int N, int* Const,int (*Ecoe)[N],int n)//nä¸ºå½“å‰åˆ—æ•°
 {
-    printf("--------------¾ØÕó--------------\n");
+    printf("--------------çŸ©é˜µ--------------\n");
     int i,j;
     for(i=0;i<=n-1;i++)
     {
@@ -444,12 +444,12 @@ void PrintEQA(int N, int* Const,int (*Ecoe)[N],int n)//nÎªµ±Ç°ÁĞÊı
     }
     printf("--------------------------------\n");
 }
-/*int* GaussEliminate(int N,int* Const,int (*Ecoe)[N])  //¸ßË¹ÏûÔª
+/*int* GaussEliminate(int N,int* Const,int (*Ecoe)[N])  //é«˜æ–¯æ¶ˆå…ƒ
 {
     int* Enum=(int*)malloc(N*sizeof(int)),*pN=&N;
     int i=0,j=0,k=0,m,delta,mark,sign=0,n=N;
-    //sign±êÊ¶ÊÇ·ñÏû¹ıÔª
-    //i:ÕıÔÚ´¦ÀíµÚ(i+1)¸ö·½³Ì m:ÕıÔÚ¼ì²éµÚm+1¸öÔªÊÇ·ñ±»ÏûÈ¥
+    //signæ ‡è¯†æ˜¯å¦æ¶ˆè¿‡å…ƒ
+    //i:æ­£åœ¨å¤„ç†ç¬¬(i+1)ä¸ªæ–¹ç¨‹ m:æ­£åœ¨æ£€æŸ¥ç¬¬m+1ä¸ªå…ƒæ˜¯å¦è¢«æ¶ˆå»
     for(;;)
     {
         sign=0;
@@ -457,14 +457,14 @@ void PrintEQA(int N, int* Const,int (*Ecoe)[N],int n)//nÎªµ±Ç°ÁĞÊı
         {
             if(n==1) {sign=1;break;}
             if(Ecoe[i][m]==0) {if(m!=n-2) continue; else {sign=1;break;}}
-            else if(m>=i) {i++;break;} //¸ÃĞĞµÄÔªÏû¹»ÁË
-            //¸ÃĞĞ»¹Ğè¼ÌĞøÏûÔª
+            else if(m>=i) {i++;break;} //è¯¥è¡Œçš„å…ƒæ¶ˆå¤Ÿäº†
+            //è¯¥è¡Œè¿˜éœ€ç»§ç»­æ¶ˆå…ƒ
             for(k=0;k<i;k++)
             {
-                mark=0;//¼ÇÂ¼µÚ(m+1)Î»Ç°ÃæÊÇ·ñÓĞ·ÇÁãÏî
-                for(j=0;j<m;j++) //ÓëµÚ(i+1)¸ö·½³Ì±È½ÏµÄ·½³Ì£¬µÚ(m+1)Î»ÒÔÇ°±ØĞë¶¼ÒÑ¾­ÏûÔª
+                mark=0;//è®°å½•ç¬¬(m+1)ä½å‰é¢æ˜¯å¦æœ‰éé›¶é¡¹
+                for(j=0;j<m;j++) //ä¸ç¬¬(i+1)ä¸ªæ–¹ç¨‹æ¯”è¾ƒçš„æ–¹ç¨‹ï¼Œç¬¬(m+1)ä½ä»¥å‰å¿…é¡»éƒ½å·²ç»æ¶ˆå…ƒ
                 if(Ecoe[k][j]!=0) {mark=1;break;}
-                if(mark==1||Ecoe[k][m]==0) {if(k==i-1) {printf("½â·½³Ì´íÎó£¡m=%d k=%d i=%d\n",m,k,i);} else continue;} //ÓĞ·ÇÁãÏî,»òÕßµÚ(m+1)Î»²»ÎªÁã¾Í²»ºÏÒªÇó
+                if(mark==1||Ecoe[k][m]==0) {if(k==i-1) {printf("è§£æ–¹ç¨‹é”™è¯¯ï¼m=%d k=%d i=%d\n",m,k,i);} else continue;} //æœ‰éé›¶é¡¹,æˆ–è€…ç¬¬(m+1)ä½ä¸ä¸ºé›¶å°±ä¸åˆè¦æ±‚
                 printf("m=%d k=%d i=%d sign=%d N=%d\n",m,k,i,sign,N);
                 delta=(powerof(Ecoe[k][m])-powerof(Ecoe[i][m]))>=0?(powerof(Ecoe[k][m])-powerof(Ecoe[i][m])):(powerof(Ecoe[k][m])-powerof(Ecoe[i][m])+255);
                 PolyMultiply(N,Const,Ecoe,i,delta);
@@ -474,21 +474,21 @@ void PrintEQA(int N, int* Const,int (*Ecoe)[N],int n)//nÎªµ±Ç°ÁĞÊı
                 PolyAdd(N,Const,Ecoe,i,k);
                 //printf("After Add:\n");
                 //PrintEQA(N,Const,Ecoe,n);//system("pause");
-                break;//Ïû¹ıÔª£¬ÎŞĞè¼ÌĞøÑ­»·
+                break;//æ¶ˆè¿‡å…ƒï¼Œæ— éœ€ç»§ç»­å¾ªç¯
             }
             if(Ecoe[i][m]==0) if(m==n-2){sign=1;break;}
         }
-        if(sign==1) //Èç¹û×îºóÒ»¸ö½âÒÑ¾­ÏÔÏÖ
+        if(sign==1) //å¦‚æœæœ€åä¸€ä¸ªè§£å·²ç»æ˜¾ç°
         {
-            //printf("ÏûÔªÇ°£º\n");
+            //printf("æ¶ˆå…ƒå‰ï¼š\n");
             //PrintEQA(N,Const,Ecoe,n);system("pause");
             Enum[n-1]=GFdivide(Const[i],Ecoe[i][n-1]);
             //Enum[n-1]=alphato((powerof(Const[i]-powerof(Ecoe[i][n-1])))>=0?(powerof(Const[i]-powerof(Ecoe[i][n-1]))):(powerof(Const[i]-powerof(Ecoe[i][n-1]))+255));
             RowExchange(N,Const,Ecoe,n-1,i);
             RootSubstract(N,Const,Ecoe,Enum[n-1],n);
-            //printf("Ïû¹ıÔªºó£º\n");
+            //printf("æ¶ˆè¿‡å…ƒåï¼š\n");
             //PrintEQA(N,Const,Ecoe,n);system("pause");
-            //printf("N--ºó£ºÖ®ºón=%d\n",n-1);
+            //printf("N--åï¼šä¹‹ån=%d\n",n-1);
             n--;
             //PrintEQA(N,Const,Ecoe,n);system("pause");
             if(n==0) break;
@@ -530,29 +530,29 @@ CodeArray calecode(CodeArray msgcode,int n,int k)
     int i,j,msgnum[k],len;
     //printf("k=%d\n",k);
     for(i=0;i<=k-1;i++) msgnum[i]=codetonum(msgcode[i]);
-    //printf("Êı¾İÂë×Ö\n");
+    //printf("æ•°æ®ç å­—\n");
     //for(i=0;i<=k-1;i++) printf("%d ",msgnum[i]);
     //printf("\n");
     CodeArray Ecode=(CodeArray)malloc((n-k)*9);
     char temp[9];
-    //ÒÔÏÂÊÇ·½³ÌµÄ¸÷²¿·Ö£º
-    int* Const=(int*)malloc((n-k)*sizeof(int));//n-k¸ö·½³Ì£¬Ã¿¸ö·½³ÌÓĞÒ»¸ö³£Êı
+    //ä»¥ä¸‹æ˜¯æ–¹ç¨‹çš„å„éƒ¨åˆ†ï¼š
+    int* Const=(int*)malloc((n-k)*sizeof(int));//n-kä¸ªæ–¹ç¨‹ï¼Œæ¯ä¸ªæ–¹ç¨‹æœ‰ä¸€ä¸ªå¸¸æ•°
     int (*Ecoe)[n-k]=(int(*)[n-k])malloc((n-k)*(n-k)*sizeof(int));
-    //int Ecoee[n-k][n-k];//n-k¸ö·½³Ì£¬Ã¿¸ö·½³ÌÓĞ(n-k)¸öÏµÊı
-    int* Enum; //=(int*)malloc((n-k)*sizeof(int)); //E0£¬E1£¬...£¬E(n-k-1)Î´ÖªÊı
-    for(i=0;i<=n-k-1;i++) //i:µÚi¸ö·½³Ì
+    //int Ecoee[n-k][n-k];//n-kä¸ªæ–¹ç¨‹ï¼Œæ¯ä¸ªæ–¹ç¨‹æœ‰(n-k)ä¸ªç³»æ•°
+    int* Enum; //=(int*)malloc((n-k)*sizeof(int)); //E0ï¼ŒE1ï¼Œ...ï¼ŒE(n-k-1)æœªçŸ¥æ•°
+    for(i=0;i<=n-k-1;i++) //i:ç¬¬iä¸ªæ–¹ç¨‹
     {
         //x=alphato(i+1);
         //GFmulti(msgnum[j],alphato(i*(n-j-1)))
-        for(j=0,Const[i]=0;j<=k-1;j++) {Const[i]=GFadd(GFmultialphato(msgnum[j],i*(n-j-1)),Const[i]);} //¼ÆËãConst[i]
+        for(j=0,Const[i]=0;j<=k-1;j++) {Const[i]=GFadd(GFmultialphato(msgnum[j],i*(n-j-1)),Const[i]);} //è®¡ç®—Const[i]
         //printf("Constant%d now:%d add1:%d msgnum:%d ...=%d\n",i,Const[i],msgnum[j],alphato((i+1)*(n-j-1)));
-        for(j=0;j<=n-k-1;j++) Ecoe[i][j]=alphato(i*j); //¼ÆËãE[j]µÄÏµÊı Ô­Îªn-k-j-1
+        for(j=0;j<=n-k-1;j++) Ecoe[i][j]=alphato(i*j); //è®¡ç®—E[j]çš„ç³»æ•° åŸä¸ºn-k-j-1
     }
-    //printf("³õÊ¼£º\n");
+    //printf("åˆå§‹ï¼š\n");
     //PrintEQA(n-k,Const,Ecoe,n-k);
     //system("pause");
     Enum=GaussEliminate(n-k,Const,Ecoe);
-    //printf("¾À´íÂë×Ö£º\n");
+    //printf("çº é”™ç å­—ï¼š\n");
     //for(j=0;j<=n-k-1;j++) printf("%d ",Enum[j]);
     //printf("\n");
     for(i=0;i<=n-k-1;i++)
@@ -568,14 +568,14 @@ CodeArray calecode(CodeArray msgcode,int n,int k)
 
 CodeArray* todatacode(Qrcodeinfo* qrcode,CodeArray msgcode)
 {
-    int m=0,t=0,i,j,k,n,num=(qrcode->ecodata.blockn[0]+qrcode->ecodata.blockn[1])*2;//Ã¿¸öblocknÖĞÊı¾İÂë×ÖºÍ¾À´íÂë×Ö¸÷ÓĞÒ»¸öCodeArray£¬¹Ê³Ë2
+    int m=0,t=0,i,j,k,n,num=(qrcode->ecodata.blockn[0]+qrcode->ecodata.blockn[1])*2;//æ¯ä¸ªblocknä¸­æ•°æ®ç å­—å’Œçº é”™ç å­—å„æœ‰ä¸€ä¸ªCodeArrayï¼Œæ•…ä¹˜2
     //CodeArray datacode[num];
     CodeArray* datacode=(CodeArray*)malloc(num*sizeof(CodeArray));
     CodeArray p;
     for(j=0;j<=1;j++)
     {
-        int Dn=qrcode->ecodata.CKR[j][1]; //µÚ£¨j+1£©ÀàĞÍ¿éµÄÊı¾İÂë×ÖÊı
-        n=qrcode->ecodata.blockn[j];  //µÚ£¨j+1£©ÀàĞÍ¿éµÄ¿éÊı
+        int Dn=qrcode->ecodata.CKR[j][1]; //ç¬¬ï¼ˆj+1ï¼‰ç±»å‹å—çš„æ•°æ®ç å­—æ•°
+        n=qrcode->ecodata.blockn[j];  //ç¬¬ï¼ˆj+1ï¼‰ç±»å‹å—çš„å—æ•°
         for(k=0;k<=n-1;k++)
         {
             p=(CodeArray)malloc(Dn*9);
@@ -586,13 +586,13 @@ CodeArray* todatacode(Qrcodeinfo* qrcode,CodeArray msgcode)
     }
     for(j=0;j<=1;j++)
     {
-        int Dn=qrcode->ecodata.CKR[j][1]; //µÚ£¨j+1£©ÀàĞÍ¿éµÄÊı¾İÂë×ÖÊı
-        int En=qrcode->ecodata.CKR[j][0]-qrcode->ecodata.CKR[j][1]; //µÚ£¨j+1£©ÀàĞÍ¿éµÄ¾À´íÂë×ÖÊı
+        int Dn=qrcode->ecodata.CKR[j][1]; //ç¬¬ï¼ˆj+1ï¼‰ç±»å‹å—çš„æ•°æ®ç å­—æ•°
+        int En=qrcode->ecodata.CKR[j][0]-qrcode->ecodata.CKR[j][1]; //ç¬¬ï¼ˆj+1ï¼‰ç±»å‹å—çš„çº é”™ç å­—æ•°
         n=qrcode->ecodata.blockn[j];
         for(k=0;k<=n-1;k++)
         {
             p=calecode(datacode[t++],Dn+En,Dn);
-            //printf("µÚ%d¸ö¾À´íÂë×ÖÒÑ¼ÆËã,n=%d\n",k+1,n);
+            //printf("ç¬¬%dä¸ªçº é”™ç å­—å·²è®¡ç®—,n=%d\n",k+1,n);
             datacode[m++]=p;
         }
     }
@@ -603,27 +603,27 @@ void Printdata(CodeArray* datacode,int num,Qrcodeinfo* qrcode)
     int test,m=0,i,j,k,n;
     for(j=0;j<=1;j++)
     {
-        int Dn=qrcode->ecodata.CKR[j][1]; //µÚ£¨j+1£©ÀàĞÍ¿éµÄÊı¾İÂë×ÖÊı
-        n=qrcode->ecodata.blockn[j];  //µÚ£¨j+1£©ÀàĞÍ¿éµÄ¿éÊı
+        int Dn=qrcode->ecodata.CKR[j][1]; //ç¬¬ï¼ˆj+1ï¼‰ç±»å‹å—çš„æ•°æ®ç å­—æ•°
+        n=qrcode->ecodata.blockn[j];  //ç¬¬ï¼ˆj+1ï¼‰ç±»å‹å—çš„å—æ•°
         /*for(k=0;k<=n-1;k++)
         {
             for(i=0;i<=Dn-1;i++)
                 puts(datacode[m][i]);
-            printf("DnÊı¾İÂë×ÖÊı£º%d\n",Dn);
+            printf("Dnæ•°æ®ç å­—æ•°ï¼š%d\n",Dn);
             m++;
 
         }*/
     }
     for(j=0;j<=1;j++)
     {
-        //int Dn=qrcode->ecodata.CKR[j][1]; //µÚ£¨j+1£©ÀàĞÍ¿éµÄÊı¾İÂë×ÖÊı
-        int En=qrcode->ecodata.CKR[j][0]-qrcode->ecodata.CKR[j][1]; //µÚ£¨j+1£©ÀàĞÍ¿éµÄ¾À´íÂë×ÖÊı
+        //int Dn=qrcode->ecodata.CKR[j][1]; //ç¬¬ï¼ˆj+1ï¼‰ç±»å‹å—çš„æ•°æ®ç å­—æ•°
+        int En=qrcode->ecodata.CKR[j][0]-qrcode->ecodata.CKR[j][1]; //ç¬¬ï¼ˆj+1ï¼‰ç±»å‹å—çš„çº é”™ç å­—æ•°
         n=qrcode->ecodata.blockn[j];
         /*for(k=0;k<=n-1;k++)
         {
             for(test=0;test<=En-1;test++)
                 puts(datacode[m][test]);
-            printf("En¾À´íÂë×ÖÊı£º%d\n",En);
+            printf("Ençº é”™ç å­—æ•°ï¼š%d\n",En);
             m++;
         }*/
 
@@ -634,15 +634,15 @@ void drawpixel(double x,double y,double len,int col)
 
 
     if(col==0)
-    al_draw_filled_rectangle(x, y, x + len, y + len, al_map_rgb(255, 255, 255)); //0±í°×
+    al_draw_filled_rectangle(x, y, x + len, y + len, al_map_rgb(255, 255, 255)); //0è¡¨ç™½
     if(col==1)
-    al_draw_filled_rectangle(x, y, x + len, y + len, al_map_rgb(0, 0, 0)); //1±íºÚ
+    al_draw_filled_rectangle(x, y, x + len, y + len, al_map_rgb(0, 0, 0)); //1è¡¨é»‘
     if(col==2)
-        al_draw_filled_rectangle(x, y, x + len, y + len, al_map_rgb(255, 0, 0)); //1±íºÚ
+        al_draw_filled_rectangle(x, y, x + len, y + len, al_map_rgb(255, 0, 0)); //1è¡¨é»‘
     if(col==3)
         al_draw_filled_rectangle(x, y, x + len, y + len, al_map_rgb(0, 255, 0));;
     if(col==4)
-        al_draw_filled_rectangle(x, y, x + len, y + len, al_map_rgb(96, 255, 255)); //Ç³À¶
+        al_draw_filled_rectangle(x, y, x + len, y + len, al_map_rgb(96, 255, 255)); //æµ…è“
 }
 void addrectframe(char(*finbin)[],Qrcodeinfo* qrcode,int x,int y,int len,char col)
 {
@@ -701,7 +701,7 @@ void addtimingpatt(char(*finbin)[],Qrcodeinfo* qrcode)
 {
     int i,j,count=1,len=qrcode->length;
     char(*fbin)[len]=finbin;
-    for(i=6,j=8;j<=len-1;j++,count++) if(fbin[i][j]==0) fbin[i][j]=count%2+48;  //'0'µÄASCIIÂëÊÇ48
+    for(i=6,j=8;j<=len-1;j++,count++) if(fbin[i][j]==0) fbin[i][j]=count%2+48;  //'0'çš„ASCIIç æ˜¯48
     count=1;
     for(j=6,i=8;i<=len-1;i++,count++) if(fbin[i][j]==0) fbin[i][j]=count%2+48;
 }
@@ -753,7 +753,7 @@ void addfuncpatt(char(*finbin)[],Qrcodeinfo* qrcode)
     format_init(finbin,qrcode);
     addformatinf(finbin,qrcode);
 
-    //¸ñÊ½ĞÅÏ¢¡¢°æ±¾ĞÅÏ¢ÊôÓÚ±àÂëÇøÓò£¬µ«²»²ÎÓëÍ³Ò»µÄÑÚÄ¤£¬¹Ê¿ÉÒÔÊÓÎª¹¦ÄÜÍ¼ĞÎ
+    //æ ¼å¼ä¿¡æ¯ã€ç‰ˆæœ¬ä¿¡æ¯å±äºç¼–ç åŒºåŸŸï¼Œä½†ä¸å‚ä¸ç»Ÿä¸€çš„æ©è†œï¼Œæ•…å¯ä»¥è§†ä¸ºåŠŸèƒ½å›¾å½¢
 }
 void addphotopart(char(*photobin)[],Qrcodeinfo* qrcode)
 {
@@ -803,7 +803,7 @@ void toQRbmp(int len,char(*bin)[len])
         for(j=0;j<=len-1;j++)
            if(bin[i][j]=='1') drawpixel(50+len0*j,50+len0*i,len0,1);
 }
-void toQRbmp2(int len,char(*bin)[len])//¹©findbinÊ¹ÓÃ
+void toQRbmp2(int len,char(*bin)[len])//ä¾›findbinä½¿ç”¨
 {
     double len0=(double)TOTALLENGTH/len;
     int i,j;
@@ -819,7 +819,7 @@ void toQRbmp3(int len,char(*bin)[len])
     for(i=0;i<=len-1;i++)
         for(j=0;j<=len-1;j++)
            {if(bin[i][j]=='1') drawpixel(50+len0*j,50+len0*i,len0,2);
-           if(bin[i][j]=='0') drawpixel(50+len0*j,50+len0*i,len0,4);}//Ç³À¶×¨ÓÃÓÚ±êÊ¶finbinµÄÇ³É«}
+           if(bin[i][j]=='0') drawpixel(50+len0*j,50+len0*i,len0,4);}//æµ…è“ä¸“ç”¨äºæ ‡è¯†finbinçš„æµ…è‰²}
 }
 void finbin_init(Qrcodeinfo* qrcode,char(*finbin)[])
 {
@@ -843,8 +843,8 @@ void nextblock(Qrcodeinfo* qrcode,char(*finbin)[],char(*findbin)[],char block)
     char(*fbin)[len]=finbin;
     char(*fdbin)[len]=findbin;
     static int x=0,y=0,flag1=0,flag2=0,init=1;
-    //µ±Ìî³äµÄÄ£¿éÎ»ÓÚÊúÖ±À¸µÄÓÒ²àÊ±flag1=0 µ±ÏòÉÏÌî³äÊ±flag2=0
-    //¼ì²â
+    //å½“å¡«å……çš„æ¨¡å—ä½äºç«–ç›´æ çš„å³ä¾§æ—¶flag1=0 å½“å‘ä¸Šå¡«å……æ—¶flag2=0
+    //æ£€æµ‹
     if(init==1) {x=len-1;y=len-1;init=0;}
     for(count=0;count<=10000;count++)
     {
@@ -891,17 +891,17 @@ void filldata(Qrcodeinfo* qrcode,CodeArray* datacode,char(*finbin)[],char(*findb
     int En1=qrcode->ecodata.CKR[0][0]-Dn1;
     int blockn=qrcode->ecodata.blockn[0]+qrcode->ecodata.blockn[1];
     int blockn1=qrcode->ecodata.blockn[0],count=0;
-    //¶Ô½Ï¶Ì³¤¶ÈµÄÊı¾İÂë×ÖCodeArrayµÄÌîÈë
+    //å¯¹è¾ƒçŸ­é•¿åº¦çš„æ•°æ®ç å­—CodeArrayçš„å¡«å…¥
     for(i=0;i<=Dn1-1;i++)
         for(j=0;j<=blockn-1;j++)
             for(k=0;k<=7;k++)
             {nextblock(qrcode,finbin,findbin,datacode[j][i][k]);if(datacode[j][i][k]==18) printf("error18: j=%d i=%d k=%d\n",j,i,k);}
-    //¶Ô½Ï³¤³¤¶ÈµÄÊı¾İÂë×ÖCodeArrayµÄÌîÈë
+    //å¯¹è¾ƒé•¿é•¿åº¦çš„æ•°æ®ç å­—CodeArrayçš„å¡«å…¥
     for(i=Dn1;i<=Dn2-1;i++)
         for(j=blockn1;j<=blockn-1;j++)
             for(k=0;k<=7;k++)
             {nextblock(qrcode,finbin,findbin,datacode[j][i][k]);if(datacode[j][i][k]==18) printf("error18: j=%d i=%d k=%d\n",j,i,k);}
-    //¶Ô¾À´íÂë×ÖµÄÌîÈë£¨ËùÓĞ¿éµÄ¾À´íÂë×ÖCodeArray³¤¶ÈÒ»Ñù³¤£©
+    //å¯¹çº é”™ç å­—çš„å¡«å…¥ï¼ˆæ‰€æœ‰å—çš„çº é”™ç å­—CodeArrayé•¿åº¦ä¸€æ ·é•¿ï¼‰
     for(i=0;i<=En1-1;i++)
         for(j=blockn;j<=2*blockn-1;j++)
         for(k=0;k<=7;k++)
@@ -923,7 +923,7 @@ int isfromfile(char* text)
 void str_check(char* text,int* pmode,int* pver,int argc,char** argv)
 {
     int mode,ver,num,flag=1,len;
-    //flag±ê¼ÇÊÇ·ñĞèÒªµÚ¶ş´ÎÊäÈë
+    //flagæ ‡è®°æ˜¯å¦éœ€è¦ç¬¬äºŒæ¬¡è¾“å…¥
     FILE* fp;
     for(;;)
     {
@@ -937,15 +937,15 @@ void str_check(char* text,int* pmode,int* pver,int argc,char** argv)
     }
     else
     {
-        printf("ÇëÊäÈëÒ»´®Êı×Ö»òASCIIÂë£º\n");
+        printf("è¯·è¾“å…¥ä¸€ä¸²æ•°å­—æˆ–ASCIIç ï¼š\n");
         gets(text);
     }
 
         if(isfromfile(text))
         {
-            printf("´ÓÎÄ¼ş%s¶ÁÈ¡...\n",text);
+            printf("ä»æ–‡ä»¶%sè¯»å–...\n",text);
             if((fp=fopen(text,"r"))==NULL)
-                {printf("Î´ÕÒµ½%s\n",text);continue;}
+                {printf("æœªæ‰¾åˆ°%s\n",text);continue;}
             else
             {
                 fseek(fp,0L,SEEK_END);
@@ -955,15 +955,15 @@ void str_check(char* text,int* pmode,int* pver,int argc,char** argv)
                 fread(text,1,len,fp);
                 text[len]=0;
                 fclose(fp);
-                printf("ÏÖÔÚtextÎª%s\n",text);
+                printf("ç°åœ¨textä¸º%s\n",text);
             }
         }
-        if(*text==0) {printf("ÄãºÃÏñÃ»ÓĞÊäÈëÄÚÈİÅ¶£¬ÇëÖØĞÂÊäÈë£º\n");continue;}
+        if(*text==0) {printf("ä½ å¥½åƒæ²¡æœ‰è¾“å…¥å†…å®¹å“¦ï¼Œè¯·é‡æ–°è¾“å…¥ï¼š\n");continue;}
         mode=str_analysis(text);
-        ver=ver_determine(text,mode);    //È·¶¨°æ±¾
-        if(ver>0&&ver<=MAXVERSION) {printf("ÒÑÈ·¶¨°æ±¾Îª%d\n",ver);break;}
-        else if(ver==-1) printf("ÊäÈëÊı¾İ¹ı³¤£¬ÇëÖØĞÂÊäÈë£º\n");
-        else if(ver==-2) printf("Î´Öª´íÎó£¡Çë³¢ÊÔÖØĞÂÊäÈë£º\n");
+        ver=ver_determine(text,mode);    //ç¡®å®šç‰ˆæœ¬
+        if(ver>0&&ver<=MAXVERSION) {printf("å·²ç¡®å®šç‰ˆæœ¬ä¸º%d\n",ver);break;}
+        else if(ver==-1) printf("è¾“å…¥æ•°æ®è¿‡é•¿ï¼Œè¯·é‡æ–°è¾“å…¥ï¼š\n");
+        else if(ver==-2) printf("æœªçŸ¥é”™è¯¯ï¼è¯·å°è¯•é‡æ–°è¾“å…¥ï¼š\n");
     }
     *pmode=mode;
     *pver=ver;
@@ -978,8 +978,8 @@ int main(int argc, char** argv)
     int *pmode=&mode,*pver=&ver;
     welcome();
     str_check(text,pmode,pver,argc,argv);
-    if(mode==NUMBERMODE) printf("ÒÑÈ·¶¨Ä£Ê½ÎªÊı×ÖÄ£Ê½\n");
-    if(mode==ASCIIMODE) printf("ÒÑÈ·¶¨Ä£Ê½Îª8Î»×Ö½ÚÄ£Ê½\n");
+    if(mode==NUMBERMODE) printf("å·²ç¡®å®šæ¨¡å¼ä¸ºæ•°å­—æ¨¡å¼\n");
+    if(mode==ASCIIMODE) printf("å·²ç¡®å®šæ¨¡å¼ä¸º8ä½å­—èŠ‚æ¨¡å¼\n");
     QRinit(qrcode,ver);
     //system("pause");
     char (*finbin)[qrcode->length]=(char(*)[qrcode->length])malloc(qrcode->length*qrcode->length);
@@ -987,7 +987,7 @@ int main(int argc, char** argv)
     char (*mask)[qrcode->length]=(char(*)[qrcode->length])malloc(qrcode->length*qrcode->length);
     char (*photobin)[qrcode->length]=(char(*)[qrcode->length])malloc(qrcode->length*qrcode->length);
 
-    //findbin:×¨ÃÅ´æ·ÅÊı¾İÂë×Ö
+    //findbin:ä¸“é—¨å­˜æ”¾æ•°æ®ç å­—
     finbin_init(qrcode,finbin);
     finbin_init(qrcode,findbin);
     finbin_init(qrcode,photobin);
@@ -1005,7 +1005,7 @@ int main(int argc, char** argv)
     datacode=todatacode(qrcode,msgcode);
     //Printdata(datacode,num,qrcode);
     //------------------------------------
-        printf("ÕıÔÚ¼ÓÔØÍ¼ĞÎ½çÃæ...\n");
+        printf("æ­£åœ¨åŠ è½½å›¾å½¢ç•Œé¢...\n");
     if (!al_init()) {
       printf("Could not init Allegro.\n");
       return -1;
